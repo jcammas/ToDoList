@@ -1,2 +1,3 @@
 # ToDoList
-to do list js
+
+Petit projet en js --> to do list 
