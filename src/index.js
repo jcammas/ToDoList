@@ -35,8 +35,10 @@ const createTodoElement = (todo, index) => {
   const li = document.createElement("li");
   const buttonDelete = document.createElement("button");
   buttonDelete.innerHTML = "Supprimer";
+  buttonDelete.classList.add("danger");
   const buttonEdit = document.createElement("button");
   buttonEdit.innerHTML = "Edit";
+  buttonEdit.classList.add("primary");
   buttonDelete.addEventListener("click", (event) => {
     event.stopPropagation();
     deleteTodo(index);
@@ -47,7 +49,7 @@ const createTodoElement = (todo, index) => {
   });
   li.innerHTML = `
   <span class="todo ${todo.done ? "done" : ""}"></span>
-  <p>${todo.text}</p>
+  <p class="${todo.done ? "done" : ""}">${todo.text}</p>
   `;
   li.addEventListener("click", (event) => {
     toggleTodo(index);
@@ -62,6 +64,7 @@ const createTodoEditElement = (todo, index) => {
   input.type = "text";
   input.value = todo.text;
   const buttonSave = document.createElement("button");
+  buttonSave.classList.add("success");
   buttonSave.innerHTML = "Sauvegarder";
   const buttonCancel = document.createElement("button");
   buttonCancel.innerHTML = "Annuler";
@@ -72,16 +75,24 @@ const createTodoEditElement = (todo, index) => {
   buttonSave.addEventListener("click", (event) => {
     editTodo(index, input);
   });
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      editTodo(index, input);
+    }
+  });
   li.append(input, buttonCancel, buttonSave);
   return li;
 };
 
 const addTodo = (text) => {
-  todos.push({
-    text,
-    done: false,
-  });
-  displayTodo();
+  text = text.trim();
+  if (text) {
+    todos.push({
+      text: `${text[0].toUpperCase()}${text.slice(1)}`,
+      done: false,
+    });
+    displayTodo();
+  }
 };
 
 const deleteTodo = (index) => {

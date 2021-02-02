@@ -18,7 +18,7 @@ body {
 }
 
 h1 {
-  color: lightpink;
+  color: #333;
 }
 
 form {
@@ -27,7 +27,7 @@ form {
 }
 
 button {
-  background: lightpink;
+  background: #333;
   font-weight: bold;
   color: #eee;
   padding: 5px 15px;
@@ -36,6 +36,18 @@ button {
   margin: 3px;
   cursor: pointer;
   outline: 0;
+}
+
+button.danger {
+  background: #eb2f06;
+}
+
+button.primary {
+  background: #4a69bd;
+}
+
+button.success {
+  background: #2ed573;
 }
 
 input {
@@ -61,7 +73,9 @@ li {
   display: flex;
   align-items: center;
   padding: 10px 0;
+  cursor: pointer;
 }
+
 li input {
   flex: 1;
   margin: 1;
@@ -69,6 +83,10 @@ li input {
 
 li p {
   flex: 1;
+}
+
+li p.done {
+  text-decoration: line-through;
 }
 
 li .todo {
